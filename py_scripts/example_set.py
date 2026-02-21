@@ -20,10 +20,9 @@ prot_fam = "glucose-6-phosphatase".lower()
 tax_group = "Aves".lower()
 
 # Out file to enter into MySQL
-sql_file = "example_record.csv"
+sql_file = "../downloaded_sequences/example_record.csv"
 
 # NCBI query
-#TODO: COMPLETE vs. NOT partial return completely different results
 query = f"{prot_fam}[Prot] AND {tax_group}[Organism] NOT partial"
 
 # searching, limiting to 1000 results
