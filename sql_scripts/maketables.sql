@@ -1,6 +1,10 @@
 # Adapted from class code
 CREATE DATABASE IF NOT EXISTS s2883992_web_project;
 USE s2883992_web_project;
+DROP TABLE seq_group;
+DROP TABLE sequences;
+DROP TABLE jobs;
+DROP TABLE queries;
 
 # queries table for unique query combinations (protein and taxon)
 CREATE TABLE `queries` (
