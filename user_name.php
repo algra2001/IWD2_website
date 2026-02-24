@@ -3,8 +3,15 @@ session_start();
 require_once 'login.php';
 echo<<<_HEAD1
 <html>
-<body>
+<body onload="displayForm()">
 _HEAD1;
+
+//TODO: add a nice welcome message
+//
+echo<<<_WELCOME
+<h1>Website name</h1>
+<h2>Welcome message to the users, perhaps a short description</h2>
+_WELCOME;
 
 // Checking connection to database using details from login.php
 try {
@@ -18,7 +25,7 @@ try {
    echo <<<_EOP
 <script>
 // Adapted from: https://www.geeksforgeeks.org/javascript/username-validation-in-js-regex/
-// and from class
+// and from class code
 // A function to validate user name entered at form
     function validate(form) {
 	let fail = "";
@@ -33,7 +40,7 @@ try {
 	fail = "Username is too long.";
 // Checking for permitted characters
 	} else {
-	const pattern = /^[a-zA-Z0-9_]{6,16}$/;
+	const pattern = /^[\w]{6,16}$/;
 // Alerting error
 	if(!pattern.test(userName)) fail = "Username contains illegal characters";
 	}
@@ -46,8 +53,14 @@ try {
 }
 </script>
 <br/>
-<!-- form to retrieve user name -->
-<form action="indexp.php" method="post" onsubmit="return validate(this)">
+<!--TODO: perhaps add an optional choice of cookies instead of username-->
+<!--Deciding whether to save resulst-->
+
+<script>
+// form to retrieve user name if saving
+function displayForm()
+{
+document.getElementById("save_choice").innerHTML=`<form action="indexp.php" method="post" onsubmit="return validate(this)">
 <p>Enter a user name to save results. Can contain letters, numbers and underscores. 
 <br/>Must be between 6 and 16 characters long.<p/>  
 <table>
@@ -56,7 +69,29 @@ try {
     </tr>
   </table>
 <br/><input type="submit" value="submit" />
-</form>
+</form>`;
+}
+
+// deleting form if not saving
+function delForm()
+{
+document.getElementById("save_choice").innerHTML=`<form action="indexp.php" method="post">
+<input type="hidden" name="user_name" value="no-save" />
+<p><input type="submit" value="continue" /></p>
+</form>`;
+}
+</script>
+
+<!-- displaying options for saving results -->
+<p>
+<input type="radio" name="save_choice" id="save_yes" value="save" onclick="displayForm()" checked>
+<label for="save_yes">Save results</label>
+</p>
+<p>
+<input type="radio" name="save_choice" id="save_no" value="no-save" onclick="delForm()">
+<label for="save_no">Don't save results</label>
+</p>
+<p id="save_choice"></p>
 _EOP;
 
 echo <<<_TAIL1
