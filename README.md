@@ -15,8 +15,6 @@ The website allows users to test the conservation level of a family of related p
 
 Python processing scripts of the retrieved data from public databases. The scripts simplify the data and allow working with it in backend server settings.
 
-Also included is **`full_process.txt`**, which provides an ordered record of all commands run throughout the analysis pipeline.
-
 ### `sql_scripts/`
 
 The SQL script used to create the database. Includes the table design with relevant constraints and indexing.
