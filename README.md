@@ -3,9 +3,20 @@
 ## Overview
 
 This repository contains the scripts used to create a protein conservation analysis website interface as part of the Introduction to Website and Database Design at the University of Edinburgh (https://bioinfmsc8.bio.ed.ac.uk/~s2883992/website/front).
-The website allows users to test the conservation level of a family of related proteins within a certain taxonomic group, using publicly available tools (sequences from NCBI, multiple sequence alignment with ClustalO, conservation plot with plotcon and motif searching against PROSITE with patmatmotifs).
+The website allows users to test the conservation level of a family of related proteins within a certain taxonomic group, using publicly available tools (sequences from NCBI, multiple sequence alignment with ClustalO, conservation plot with plotcon, and motif searching against PROSITE with patmatmotifs).
 
 **Required software:** PHP · Python · MySQL · JavaScript (AJAX) · EMBOSS suite
+
+---
+
+## Analysis pipeline
+
+1. Retrieve sequences for a protein family + taxonomic group from NCBI (Biopython)
+2. Filter sequences (length, ambiguous residues, dataset size)
+3. Multiple sequence alignment (Clustal Omega)
+4. Conservation profile (EMBOSS plotcon)
+5. Motif/domain scan against PROSITE (EMBOSS patmatmotifs)
+6. Store all outputs in a relational MySQL database, tied to each job
 
 ---
 
@@ -13,7 +24,7 @@ The website allows users to test the conservation level of a family of related p
 
 ### `py_scripts/`
 
-Python processing scripts of the retrieved data from public databases. The scripts simplify the data and allow working with it in backend server settings.
+Python processing scripts for the retrieved data from public databases. The scripts produce outputs that can be easily loaded into MySQL.
 
 ### `sql_scripts/`
 
